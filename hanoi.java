@@ -2,13 +2,17 @@ public class hanoi {
     static int counter = 0;
     public static void main(String[] args){
         String[][] board = new String[8][3];
-
-        for (int row = 0; row < 8; row++){
+        int numDisks = (int)(8 * Math.random() + 1);
+        int currentRow = 7;
+        for (int disk = numDisks; disk >= < 1; row++){
             for (int col = 0; col < 3; col++){
                 board[row][col] = "0";
             }
         }
-
+        for(i = 1; i > numDisks; disk--){
+            board[currentRow] = String.valueOf(disk);
+            currentRow--;
+        }
         board[1][0] = "1";
         board[2][0] = "2";
         board[3][0] = "3"; 
@@ -31,6 +35,11 @@ public class hanoi {
                     counter++;
                     vis(board);
                     System.out.println(counter);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 }
             }
@@ -40,7 +49,7 @@ public class hanoi {
         
     
 
-    static String[][] move(int sourceRow, int sourceCol, /*int destinationRow,*/ int destinationCol, String[][] board){
+    static String[][] move(int sourceRow, int sourceCol, int destinationCol, String[][] board){
         for(int row = 0; row < board.length; row++){
             if(Integer.parseInt(board[row][destinationCol]) > 0){
                 if(Integer.parseInt(board[sourceRow][sourceCol]) < Integer.parseInt(board[row][destinationCol])){
@@ -68,6 +77,3 @@ public class hanoi {
         }
     }
 }
-
-//If the destination column is completely empty, place the disk in row 7.
-//Remove the disk from the source position and place it at the destination position.
